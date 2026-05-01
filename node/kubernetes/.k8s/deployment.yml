@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deployment
+  namespace: node-env
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: node-app-v1
+
+  template:
+    metadata:
+      labels: 
+        app: node-app-v1
+
+    spec:
+      containers:
+      - name: node-app-container
+        image: piyushthaware07/node-app:v1
+        ports:
+        - containerPort: 3000
+
+        env:
+          - name: PORT
+            value: "3000"
